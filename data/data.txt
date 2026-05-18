@@ -1,0 +1,1 @@
+Install CIFAR-100-Python and place in this folder.
