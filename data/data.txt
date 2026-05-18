@@ -1,1 +1,1 @@
-Install CIFAR-100-Python and place in this folder.
+Running the scripts as mentioned in README will install CIFAR-100-Python and place it in this folder.
