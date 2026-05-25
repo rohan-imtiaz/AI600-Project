@@ -9,3 +9,5 @@ Run files from /src in this order:
 7. visualize.py
 
 The other files do not need to be run.
+
+Alternately, load this directory on Drive, and run src/AI600_Project.py/.ipynb on Colab.
