@@ -2,7 +2,7 @@
 
 # INSTRUCTIONS:
 # This file is not run directly.
-# It is imported by all training scripts to provide ResNet-110, ResNet-20, and MobileNetV2.
+# It is imported by all training scripts to provide ResNet-110 and ResNet-20.
 
 import torch
 import torch.nn as nn
