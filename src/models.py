@@ -108,39 +108,3 @@ def build_resnet110():
 
 def build_resnet20():
     return ResNet(depth = 20, num_classes = 100)
-
-# Inverted residual block used inside MobileNetV2
-
-class InvertedResidual(nn.Module):
-
-    def __init__(self, input_channels, output_channels, stride, expand_ratio):
-        super(InvertedResidual, self).__init__()
-
-        self.stride = stride
-        hidden_channels = int(input_channels * expand_ratio)
-        self.use_residual = (stride == 1 and input_channels == output_channels)
-
-        layers = []
-
-        if expand_ratio != 1: # Pointwise expansion only when ratio is not 1
-            layers.append(nn.Conv2d(input_channels, hidden_channels, kernel_size = 1, bias = False))
-            layers.append(nn.BatchNorm2d(hidden_channels))
-            layers.append(nn.ReLU6(inplace = True))
-
-        layers.append(nn.Conv2d(
-            hidden_channels, hidden_channels,
-            kernel_size = 3, stride = stride, padding = 1,
-            groups = hidden_channels, bias = False
-        ))
-        layers.append(nn.BatchNorm2d(hidden_channels))
-        layers.append(nn.ReLU6(inplace = True))
-        layers.append(nn.Conv2d(hidden_channels, output_channels, kernel_size = 1, bias = False))
-        layers.append(nn.BatchNorm2d(output_channels))
-
-        self.conv = nn.Sequential(*layers)
-
-    def forward(self, x):
-        if self.use_residual:
-            return x + self.conv(x)
-        else:
-            return self.conv(x)
